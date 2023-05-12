@@ -1,20 +1,23 @@
 ---
+import { toAttributeString } from "astro/dist/runtime/server/render/util";
+
 import Layout from "../layouts/Layout.astro";
 import Guitarra from "../components/Guitarra.astro";
 import Post from "../components/Post.astro";
+import Curso from "../components/Curso.astro";
 const urlGuitarras = `${
   import.meta.env.PUBLIC_API_URL
 }/guitarras?populate=imagen`;
 const urlPosts = `${import.meta.env.PUBLIC_API_URL}/posts?populate=imagen`;
+const urlCurso = `${import.meta.env.PUBLIC_API_URL}/curso?populate=imagen`;
 
-const [resGuitarras, resPosts] = await Promise.all([
+const [resGuitarras, resPosts, resCurso] = await Promise.all([
   fetch(urlGuitarras),
   fetch(urlPosts),
+  fetch(urlCurso),
 ]);
-const [{ data: guitarras }, { data: posts }] = await Promise.all([
-  resGuitarras.json(),
-  resPosts.json(),
-]);
+const [{ data: guitarras }, { data: posts }, { data: curso }] =
+  await Promise.all([resGuitarras.json(), resPosts.json(), resCurso.json()]);
 ---
 
 <Layout
@@ -37,6 +40,11 @@ const [{ data: guitarras }, { data: posts }] = await Promise.all([
       }
     </div>
   </section>
+  <Curso
+    titulo={curso.attributes.titulo}
+    contenido={curso.attributes.contenido}
+    imagen={curso.attributes.imagen.data.attributes.url}
+  />
   <section class="contenedor">
     <h2 class="heading">Blog</h2>
     <div class="grid">
