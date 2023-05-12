@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import nosotros from "../img/nosotros.jpg";
 ---
 
 <Layout
@@ -8,7 +9,42 @@ import Layout from "../layouts/Layout.astro";
 >
   <main class="contenedor">
     <h1 class="heading">Nosotros</h1>
+    <div class="contenido">
+      <img src={nosotros} alt="Imagen de nosotros" />
+      <div>
+        <p class="parrafo">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et
+          mollis ex. Nunc et tellus in dolor tristique viverra. In sed lectus
+          vitae tortor ornare congue. Donec nec nunc sit amet augue ultricies
+          vehicula et vitae ligula. Maecenas orci metus, varius eget ante in,
+          maximus lobortis metus. Proin convallis nec nunc non efficitur.
+        </p>
+        <p class="parrafo">
+          Pellentesque molestie, turpis non efficitur eleifend, augue nibh
+          iaculis ante, eget commodo urna leo sed lectus. Aliquam accumsan nulla
+          ac vehicula efficitur. Duis auctor enim est. Sed eget tempus velit.
+          Suspendisse cursus bibendum velit vel consequat. Pellentesque luctus
+          in tortor a dapibus. Nullam luctus molestie velit non volutpat. Nunc
+          in massa massa. Ut semper elit sed dolor eleifend, eu lacinia risus
+          pharetra.
+        </p>
+      </div>
+    </div>
   </main>
 </Layout>
 
-<style></style>
+<style>
+  .contenido {
+    display: grid;
+    gap: 4rem;
+  }
+  @media (min-width: 768px) {
+    .contenido {
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+    }
+  }
+  .parrafo {
+    text-align: justify;
+  }
+</style>
